@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+  <link rel="stylesheet" href="css/botoes.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script type="text/javascript" src="js/botoes.js"></script>
+</head>
+
+<body onload="goFullScreen();">
+  <div class="sidenav">
+
+  </div>
+  <div class="main">
+    <div style="width: 100%; overflow: hidden;text-align: center; vertical-align: middle;color:white;">
+      <div style="background-color:#2f3947;width:49%;text-align: center; vertical-align: middle;float:left;border:1px solid black;">
+      <b>Unidade 1 - PHILIPS</b>
+      <br><br>
+      <table style="width:100%;">
+        <tr>
+          <td style="text-align: center; vertical-align: middle;">Paciente</td>
+          <td style="text-align: center; vertical-align: middle;">Audio</td>
+        </tr>
+        <tr>
+          <td style="text-align: center; vertical-align: middle;">
+            <div>
+              <label class="switch">
+                <input type="checkbox" id="chkIntercom1" onclick="audioIntercom(1)">
+                <span class="slider round"></span>
+              </label>
+            </div>
+          </td>
+          <td style="text-align: center; vertical-align: middle;">
+            <i id="micPaciente1" style='font-size:50px;color:white;' class="fas fa-microphone"></i>
+            <i id="bellPaciente1" style='font-size:50px;color:white;' class="far fa-bell" title="Paciente Chamando"> </i>
+          </td>
+        </tr>
+        <tr>
+          <td style="text-align: center; vertical-align: middle;">Enfermagem</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td style="text-align: center; vertical-align: middle;">
+            <div>
+              <label class="switch">
+                <input type="checkbox" id="chkEnfermagem1" onclick="audioEnfermagem(1)">
+                <span class="slider round"></span>
+              </label>
+            </div>
+          </td>
+          <td style="text-align: center; vertical-align: middle;">
+            <i id="micEnfermagem1" style='font-size:50px;color:white;' class="fas fa-microphone"></i>
+            <i id="bellEnfermagem1" style='font-size:50px;color:white;' class="far fa-bell" title="Enfermagem Chamando"> </i>
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td style="text-align: center; vertical-align: middle;">
+            <i id="mutar1" style='font-size:50px;color:white;' title="Audio mutado" class="fas fa-volume-mute" onclick="muteSpeaker(1)"></i>
+          </td>
+        </tr>
+  
+      </table>
+      </div>
+  
+      <div style="background-color:#2f3947;width:49%;text-align: center; vertical-align: middle;float:right;border:1px solid black;">
+        <b>Unidade 3 - PHILIPS</b>
+        <br><br>
+        <table style="width:100%;">
+          <tr>
+            <td style="text-align: center; vertical-align: middle;">Paciente</td>
+            <td style="text-align: center; vertical-align: middle;">Audio</td>
+          </tr>
+          <tr>
+            <td style="text-align: center; vertical-align: middle;">
+              <div>
+                <label class="switch">
+                  <input type="checkbox" id="chkIntercom3" onclick="audioIntercom(3)">
+                  <span class="slider round"></span>
+                </label>
+              </div>
+            </td>
+            <td style="text-align: center; vertical-align: middle;">
+              <i id="micPaciente3" style='font-size:50px;color:white;' class="fas fa-microphone"></i>
+              <i id="bellPaciente3" style='font-size:50px;color:white;' class="far fa-bell" title="Paciente Chamando"> </i>
+            </td>
+          </tr>
+          <tr>
+            <td style="text-align: center; vertical-align: middle;">Enfermagem</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td style="text-align: center; vertical-align: middle;">
+              <div>
+                <label class="switch">
+                  <input type="checkbox" id="chkEnfermagem3" onclick="audioEnfermagem(3)">
+                  <span class="slider round"></span>
+                </label>
+              </div>
+            </td>
+            <td style="text-align: center; vertical-align: middle;">
+              <i id="micEnfermagem3" style='font-size:50px;color:white;' class="fas fa-microphone"></i>
+              <i id="bellEnfermagem3" style='font-size:50px;color:white;' class="far fa-bell" title="Enfermagem Chamando"> </i>
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td style="text-align: center; vertical-align: middle;">
+              <i id="mutar3" style='font-size:50px;color:white;' title="Audio mutado" class="fas fa-volume-mute" onclick="muteSpeaker(3)"></i>
+            </td>
+          </tr>
+    
+        </table>
+        </div>
+    </div>
+  <br>
+    <div style="display:table-row;width: 100%; overflow: hidden;text-align: center; vertical-align: middle;">
+      <div style="width:49%;text-align: center; vertical-align: middle;float:left;">
+        <img width="99%" id="paciente1" src="http://186.193.207.158:5522/stream/video/mjpeg?resolution=HD&&Username=admin&&Password=bmNjMTcwMWE=&&tempid=0.7299572934323364" alt="">
+      </div>
+      <div style="width:49%;text-align: center; vertical-align: middle;float:right;">
+        <img width="99%" id="paciente3" src="http://186.193.207.158:5522/stream/video/mjpeg?resolution=HD&&Username=admin&&Password=bmNjMTcwMWE=&&tempid=0.7299572934323364" alt="">
+      </div>
+    </div>
+
+    <p id="txtIntercom" style="display:none">Intercom : paciente ouvindo</p>
+    <p id="txtEnfermagem" style="display:none">Intercom : enfermagem ouvindo</p>
+    <p id="txtStatus" style="display:none">Status</p>
+
+        <!-- The Modal -->
+  <div id="myModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+        <img width="100%" id="camera" src="http://186.193.207.158:5522/stream/video/mjpeg?resolution=HD&&Username=admin&&Password=bmNjMTcwMWE=&&tempid=0.7299572934323364" alt=""><br>
+        <i id="btnCameraPaciente" style='cursor:pointer;font-size:35px;color:Blue;' class="fas fa-procedures" onclick="cameraPaciente(1)"></i>
+        <i id="btnCameraSala" style='cursor:pointer;font-size:35px;color:Grey;' class="fas fa-desktop" onclick="cameraSala(1)"></i>
+    </div>
+  </div>
+
+  </div>
+
+
+
+
+</body>
+<script>
+  // Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("paciente1");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
+</html>

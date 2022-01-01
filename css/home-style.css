@@ -1,0 +1,169 @@
+.navtop {
+	background-color: #2f3947;
+	height: 50px;
+	width: 100%;
+	border: 0;
+}
+.navtop div {
+	display: flex;
+	margin: 0 auto;
+	width: 1000px;
+	height: 100%;
+}
+.navtop div h1, .navtop div a {
+	display: inline-flex;
+	align-items: center;
+}
+.navtop div h1 {
+	flex: 1;
+	font-size: 24px;
+	padding: 0;
+	margin: 0;
+	color: #eaebed;
+	font-weight: normal;
+}
+.navtop div a {
+	padding: 0 20px;
+	text-decoration: none;
+	color: #c1c4c8;
+	font-weight: bold;
+}
+.navtop div a i {
+	padding: 2px 8px 0 0;
+}
+.navtop div a:hover {
+	color: #eaebed;
+}
+body.loggedin {
+	background-color: #f3f4f7;
+}
+.content {
+	width: 1000px;
+	margin: 0 auto;
+}
+.content h2 {
+	margin: 0;
+	padding: 25px 0;
+	font-size: 22px;
+	border-bottom: 1px solid #e0e0e3;
+	color: #4a536e;
+}
+.content > p, .content > div {
+	box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
+	margin: 25px 0;
+	padding: 25px;
+	background-color: #fff;
+}
+.content > p table td, .content > div table td {
+	padding: 5px;
+}
+.content > p table td:first-child, .content > div table td:first-child {
+	font-weight: bold;
+	color: #4a536e;
+	padding-right: 15px;
+}
+.content > div p {
+	padding: 5px;
+	margin: 0 0 10px 0;
+}
+
+#grid {
+    margin-left: 0px;
+}
+
+.col {
+    width: 33%;
+    float: left;
+}
+
+.col-center {
+    width: 33%;
+    float: left;
+
+}
+
+.section {
+    margin-left: 15px;
+    height: 100px;
+}
+
+.container div {
+  display: table-cell;
+}
+
+.img-container {
+  text-align: center;
+  align: center;
+}
+
+div-title{
+  align: right;
+  background-color: #d1e0e0;
+}
+
+#videos {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+#videossingle {
+    position: relative;
+    width: 50%;
+    height: 100%;
+    display: flex;
+}
+
+#subscriber {
+    left: 0;
+    top: 0;
+    width: 30%;
+    height: 30%;
+    z-index: 10;
+}
+
+#publisher {
+    left: 0;
+    top: 100;
+    width: 30%;
+    height: 30%;
+}
+#textchat {
+    position: relative;
+    width: 100%;
+    float: left;
+    right: 0;
+    height: 100%;
+    background-color: #333;
+}
+#textchatsingle {
+    position: relative;
+    width: 50%;
+    right: 0;
+    height: 150%;
+    background-color: #333;
+}
+#history {
+     width: 100%;
+     height: 100%;
+     background-color: #333;
+     overflow: auto;
+}
+input#msgTxt {
+            height: 40px;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+}
+#history .mine {
+    color: #00FF00;
+    text-align: right;
+    margin-right: 10px;
+}
+#history .theirs {
+    color: #00FFFF;
+		text-align: left;
+    margin-left: 10px;
+
+}

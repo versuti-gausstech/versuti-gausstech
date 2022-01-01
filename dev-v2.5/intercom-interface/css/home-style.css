@@ -1,0 +1,178 @@
+.navtop {
+	background-color: #2f3947;
+	height: 50px;
+	width: 100%;
+	border: 0;
+}
+.navtop div {
+	display: flex;
+	margin: 0 auto;
+	width: 1000px;
+	height: 100%;
+}
+.navtop div h1, .navtop div a {
+	display: inline-flex;
+	align-items: center;
+}
+.navtop div h1 {
+	flex: 1;
+	font-size: 24px;
+	padding: 0;
+	margin: -400;
+	color: #eaebed;
+	font-weight: normal;
+}
+.navtop div a {
+	padding: 0 20px;
+	text-decoration: none;
+	color: #c1c4c8;
+	font-weight: bold;
+}
+.navtop div a i {
+	padding: 2px 8px 0 0;
+}
+.navtop div a:hover {
+	color: #eaebed;
+}
+
+#textchat {
+    position: relative;
+    width: 100%;
+    float: left;
+    right: 0;
+    height: 50%;
+    background-color: #333;
+}
+#textchatsingle {
+    position: relative;
+    width: 50%;
+    right: 0;
+    height: 50%;
+    background-color: #333;
+}
+#history {
+     width: 100%;
+     height: 100%;
+     background-color: #333;
+     overflow: auto;
+}
+input#msgTxt {
+            height: 40px;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+}
+#history .mine {
+    color: #00FF00;
+    text-align: right;
+    margin-right: 10px;
+}
+#history .theirs {
+    color: #00FFFF;
+		text-align: left;
+    margin-left: 10px;
+
+}
+
+
+#textchat1 {
+    position: relative;
+    width: 100%;
+    float: left;
+    right: 0;
+    height: 100%;
+    background-color: #333;
+}
+#history1 {
+     width: 100%;
+     height: 100%;
+     background-color: #333;
+     overflow: auto;
+}
+input#msgTxt1 {
+            height: 40px;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+}
+#history1 .mine {
+    color: #00FF00;
+    text-align: right;
+    margin-right: 10px;
+}
+#history1 .theirs {
+    color: #00FFFF;
+		text-align: left;
+    margin-left: 10px;
+
+}
+
+
+
+#textchat2 {
+    position: relative;
+    width: 100%;
+    float: left;
+    right: 0;
+    height: 100%;
+    background-color: #333;
+}
+#history2 {
+     width: 100%;
+     height: 100%;
+     background-color: #333;
+     overflow: auto;
+}
+input#msgTxt2 {
+            height: 40px;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+}
+
+
+#history2 .mine {
+    color: #00FF00;
+    text-align: right;
+    margin-right: 10px;
+}
+#history2 .theirs {
+    color: #00FFFF;
+		text-align: left;
+    margin-left: 10px;
+
+}
+
+#textchat3 {
+    position: relative;
+    width: 100%;
+    float: left;
+    right: 0;
+    height: 100%;
+    background-color: #333;
+}
+#history3 {
+     width: 100%;
+     height: 100%;
+     background-color: #333;
+     overflow: auto;
+}
+
+input#msgTxt3 {
+            height: 40px;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+}
+
+#history3 .mine {
+    color: #00FF00;
+    text-align: right;
+    margin-right: 10px;
+}
+#history3 .theirs {
+    color: #00FFFF;
+		text-align: left;
+    margin-left: 10px;
+
+}

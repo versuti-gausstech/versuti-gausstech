@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+  <link rel="stylesheet" href="css/mqtt.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.2/mqttws31.js"></script>
+  <script type="text/javascript" src="js/mqtt.js"></script>
+
+  <style>
+    .button {
+      background-color: #4CAF50;
+      border: none;
+      color: white;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+    }
+    </style>
+</head>
+
+<body>
+  <div class="sidenav">
+    <a href="intercom.html" style='font-size:50px;'><i class="fas fa-desktop" title="Home"></i></a>
+    <a href="config.php" style='font-size:50px;'><i class="fas fa-cog" title="Configurar"></i></a>
+    <a href="logout.php" style='font-size:50px;'><i class="fas fa-sign-out-alt" title="Sair"></i></a>
+  </div>
+  <div class="main">
+    <div id="status">
+    </div>
+    <div id="topico">
+
+    </div>
+
+    <div id="input">
+      <input type="button" class="button" value="Input Button" onclick="subscribeMQTT('cetam/#')">
+    </div>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,48 @@
+<html>
+  <head>
+    <style>
+      .image-wrapper {
+  box-sizing:border-box;
+  float: left;
+  margin-bottom:5px;
+  width: 50%;
+}
+
+.image-wrapper:nth-child(even)
+{
+  padding-left:2px;
+}
+
+.image-wrapper:nth-child(odd)
+{
+  padding-right:2px;
+}
+
+.image-wrapper > img {
+  width: 99%;
+}
+
+.image-wrapper > span {
+  display: inline-block;
+  width: 99%;
+}
+    </style>
+  </head>
+  <body>
+    <div class="image-wrapper">
+      <img src="http://admin:ncc1701a@186.193.207.158:9003/stream/video/mjpeg" />
+    </div>
+    
+    <div class="image-wrapper">
+      <img src="http://admin:ncc1701a@186.193.207.158:9007/stream/video/mjpeg" />
+    </div>
+    
+    <div class="image-wrapper">
+      <img src="http://admin:ncc1701a@186.193.207.158:9005/stream/video/mjpeg" />
+    </div>
+    
+    <div class="image-wrapper">
+      <img src="http://admin:ncc1701a@186.193.207.158:9009/stream/video/mjpeg" />
+    </div>
+  </body>
+</html>

@@ -1,0 +1,31 @@
+<html>
+<head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <title> CETAM - Command Center </title>
+    <meta name= "viewport" content= "width = device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <script src="https://static.opentok.com/v2/js/opentok.min.js"></script>
+</head>
+<body>
+
+    <div id="videos">
+        <div id="subscriber"></div>
+        <div id="publisher"></div>
+    </div>
+    <br>
+    <div>
+      <button onclick="subscribeIntercom()">Ouvir Intercom</button>
+      <button onclick="subscribeEnfermagem()">Ouvir Enfermagem</button>
+      <br>
+      <button onclick="unsubscribeIntercom()">Mutar Intercom</button>
+      <button onclick="unsubscribeEnfermagem()">Mutar Enfermagem</button>
+      <br>
+      <button onclick="falarIntercom()">Falar com Intercom</button>
+      <button onclick="falarEnfermagem()">Falar com Enfermagem</button>
+      <br>
+      <button onclick="naofalarIntercom()">Nao Falar com Intercom</button>
+      <button onclick="naofalarEnfermagem()">Nao Falar com Enfermagem</button>
+    </div>
+    <script type="text/javascript" src="js/command.js"></script>
+</body>
+</html>

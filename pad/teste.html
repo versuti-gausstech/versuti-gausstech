@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+
+</head>
+<body>
+
+<h2>Intercom PAD Interface</h2>
+
+<script>
+function executeQuery() {
+  $.ajax({
+    url: 'http://10.0.0.27:7000/ring/status',
+    success: function(data) {
+      // do something with the return value here if you like
+      
+      console.log(data);
+    }
+  });
+  setTimeout(executeQuery, 1000); // you could choose not to continue on failure...
+}
+
+$(document).ready(function() {
+  // run the first time; all subsequent calls will take care of themselves
+  setTimeout(executeQuery, 1000);
+});
+</script>
+</body>
+</html> 

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<link rel="icon" type="image/png" href="/favicon.png"/>
+
+		<title>CETAM - Gauss Command</title>
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+    <link href="css/login-page.css" rel="stylesheet" type="text/css">
+	</head>
+	<body>
+		<div class="login">
+			<h1>Gauss Command - CETAM</h1>
+			<form action="authenticate.php" method="post">
+				<label for="username">
+					<i class="fas fa-user-md"></i>
+				</label>
+				<input type="text" name="username" placeholder="usuario" id="username" required>
+				<label for="password">
+					<i class="fas fa-lock"></i>
+				</label>
+				<input type="password" name="password" placeholder="senha" id="password" required>
+				<input type="submit" value="LOGIN">
+			</form>
+		</div>
+	</body>
+</html>

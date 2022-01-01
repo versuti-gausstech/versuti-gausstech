@@ -1,0 +1,114 @@
+// GAUSS TECH
+// Funcoes de audio OpenTok para o intercom acessando intercom.php
+
+//var intercom_name = getCookie("my_id");
+
+var json_return;
+// Handling all of our errors here by alerting them
+function handleError(error) {
+  if (error) {
+    alert(error.message);
+  }
+}
+
+var publisher_dashboard;
+var session;
+
+//var sub;
+var stream;
+
+function initializeSession(key, session_id, my_token) {
+  var apiKey = key;
+  var sessionId = session_id;
+  var token = my_token;
+
+
+
+
+  // Create a publisher
+  var pub_options = { 
+                      publishAudio: true, 
+                      publishVideo:false,
+                      insertMode: 'append',
+                      width: '5%',
+                      height: '5%',
+                      name : "dashboard"
+                    };
+
+  if(publisher_dashboard)                    {
+    if(session){
+      sessionConnect(session, publisher_dashboard);
+    }
+  }else{
+    publisher_dashboard = OT.initPublisher('publisher', pub_options, handleError);
+    session = OT.initSession(apiKey, sessionId);
+  }
+  //publisher_dashboard.publishVideo(false);
+
+
+  // Subscribe to a newly created stream
+  session.on('streamCreated', function(event) {
+    nome_stream = event.stream.name;
+    console.log("Intercom conectado :" + nome_stream);
+    var sub_options = {
+      subscribeToAudio: true, 
+      subscribeToVideo: false,
+      insertMode: 'append',
+      width: '5%',
+      height: '5%'
+    };
+
+    session.subscribe(event.stream, 'subscriber', sub_options, handleError);
+  });
+}
+
+function sessionConnect(session, publisher){
+  // Connect to the session
+  session.connect(token, function(error) {
+    // If the connection is successful, initialize a publisher and publish to the session
+    if (error) {
+      handleError(error);
+    } else {
+      session.publish(publisher, handleError);
+    }
+  });
+}
+function sessionDisconnect(){
+  session.disconnect();
+}
+
+// function intercomMicrophone(status){
+//   if(status == "on"){
+//     console.log("Abrindo microfone.")
+//   }
+//   if(status == "off"){
+//     console.log("Fechando microfone.")
+//   }
+// }
+
+// function intercomSpeaker(json_command){
+//   console.log(json_command)
+//   // if(status == "on"){
+//   //   console.log("Abrindo speaker.")
+//   // }
+//   // if(status == "off"){
+//   //   console.log("Fechando speaker.")
+//   // }
+// }
+
+// function subscribeCC(){
+//   session.streams.forEach( function(item,index){if(item.name == "CommandCenterDEV"){stream = item;} });
+//   sub = session.getSubscribersForStream(stream);
+//   sub[0].subscribeToAudio(true);
+// }
+
+// function unsubscribeCC(){
+//   session.streams.forEach( function(item,index){if(item.name == "CommandCenterDEV"){stream = item;} });
+//   try{
+//     sub = session.getSubscribersForStream(stream);
+//     sub[0].subscribeToAudio(false);
+//   }catch(err){
+//     console.log("Tentou subscribe mas nao ha streams.")
+//     //console.log(err);
+//   }
+// }

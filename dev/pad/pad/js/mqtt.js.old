@@ -1,0 +1,78 @@
+//let host = "18.229.135.194";
+let host = "mqtt.gausstech.io";
+//let port = 9001;
+let port = 8083;
+let topic = 'cetam/intercom/0xb827eb3da438/#';
+let useTLS = true;
+let cleansession = true;
+let reconnectTimeout = 1500;
+let tempData = new Array();
+let mqtt;
+let connected = false;
+
+function MQTTconnect() {
+    if (typeof path == "undefined") {
+        path = '/';
+    }
+    mqtt = new Paho.MQTT.Client(host, port, path, "pad-1");
+    let options = {
+        timeout: 3,
+        useSSL: useTLS,
+        cleanSession: cleansession,
+        onSuccess: onConnect,
+        userName : "mqtt-gauss",
+        password : "Spock1701a!",
+        onFailure: function (message) {
+            console.log("Connection failed");
+            console.log(message);
+            // $('#status').html("Connection failed: " + message.errorMessage + "Retrying...")
+            //     .attr('class', 'alert alert-danger');
+            //setTimeout(MQTTconnect, reconnectTimeout);
+        }
+    };
+
+    mqtt.onConnectionLost = onConnectionLost;
+    mqtt.onMessageArrived = onMessageArrived;
+    console.log("Host: " + host + ", Port: " + port + ", Path: " + path + " TLS: " + useTLS);
+    mqtt.connect(options);
+};
+
+function onConnect() {
+    // $('#status').html('Connected to ' + host + ':' + port + path)
+    //     .attr('class', 'alert alert-success');
+    console.log("Connected to " + host + ":" + port)
+    mqtt.subscribe(topic, { qos: 0 });
+    connected = true;
+    //$('#topic').html(topic);
+    //mqtt.loop();
+};
+
+function onConnectionLost(response) {
+    setTimeout(MQTTconnect, reconnectTimeout);
+    // $('#status').html("Connection lost. Reconnecting...")
+    //     .attr('class', 'alert alert-warning');
+    console.log("Connection lost.");
+};
+
+function onMessageArrived(message) {
+    let topic = message.destinationName;
+    let payload = message.payloadString;
+    console.log("Topic: " + topic + ", Message payload: " + payload);
+    //$('#message').html(topic + ', ' + payload);
+    let topics = topic.split('/');
+    let area = topics[1];
+};
+
+function sendMessage(topic, message){
+  msg = new Paho.MQTT.Message(message);
+  msg.destinationName = topic;
+  mqtt.send(msg);
+}
+
+function subscribeMQTT(the_topic){
+    mqtt.subscribe(the_topic, { qos: 0 });
+}
+
+$(document).ready(function () {
+    MQTTconnect();
+});

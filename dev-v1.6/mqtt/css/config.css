@@ -1,0 +1,13 @@
+.module_holder {
+  background-color: #09C;
+  width: 200px;
+  height: 100px;
+  padding: 4px;
+}
+
+.module_item {
+  background-color: #069;
+  width: 100px;
+  padding: 2px;
+  height: 5px;
+}

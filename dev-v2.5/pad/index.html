@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+  <link rel="stylesheet" href="css/botoes.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.2/mqttws31.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+  <script type="text/javascript" src="js/config.js"></script>
+  <script type="text/javascript" src="js/mqtt-pad.js"></script>
+
+  <script type="text/javascript" src="js/botoes.js"></script>
+  <script src='https://jitsi.gausstech.io/external_api.js'></script>
+
+  <style>
+    .btn {
+      background-color: DodgerBlue;
+      border: none;
+      color: white;
+      padding: 12px 16px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    
+    /* Darker background on mouse-over */
+    .btn:hover {
+      background-color: RoyalBlue;
+    }
+    .btn-circle {
+      width: 50px;
+      height: 50px;
+      padding: 7px 10px;
+      border-radius: 35px;
+      font-size: 24px;
+      line-height: 1.33;
+      background-color: DodgerBlue;
+      color: white;
+    }
+</style>
+</head>
+
+<body style="background-color:#2f3947;">
+  <div class="sidenav">
+    <a href="intercom.html" style='font-size:50px;'><i class="fas fa-desktop" title="Home"></i></a>
+    <a href="config.php" style='font-size:50px;'><i class="fas fa-cog" title="Configurar"></i></a>
+    <a href="logout.php" style='font-size:50px;'><i class="fas fa-sign-out-alt" title="Sair"></i></a>
+  </div>
+  <div class="main">
+    <br><br><br>
+    <div id="div_central" style="width: 100%; overflow: hidden;text-align: center; vertical-align: middle;color:white;">
+      <div  class="container">
+        <div class="row">
+          <div class="col-6">
+            <!-- <div style="background-color: #2f3947;" class="col-3.5"> -->
+            <div id="operator-1">
+                <!-- <iframe allow="camera; microphone; display-capture; autoplay; clipboard-write" src="https://jitsi.gausstech.io/cetam#jitsi_meet_external_api_id=0&amp;userInfo.email=%22email%40gausstech.io%22&amp;userInfo.displayName=%22unidade3%22&amp;appData.localStorageContent=null" name="jitsiConferenceFrame0" id="jitsiConferenceFrame0" allowfullscreen="false" style="height: 100%; width: 100%; border: 0px;"></iframe> -->
+            </div>
+            <div id="barraRaiseHand_1" style="text-align:center;background-color: #2f3947;" >
+                <label id="chamando_1" style="color:#2f3947;font-weight:bold;"> CHAMANDO </label>
+            </div>
+            <br>
+            <div id="commandButtons" style="text-align:center;background-color: #2f3947;" >
+                <button class="btn-circle" id="btnMic_1" onclick="btnMic_1();" title="Falar com Enfermagem"><i class="fas fa-microphone"></i></button>
+                <button class="btn-circle" id="btnSpeaker_1" onclick="btnSpk_1('btnSpeaker_1');" title="Ouvir Enfermagem"><i class="fas fa-volume-up"></i></button> | 
+                <button class="btn-circle" id="btnMicPaciente" onclick="btnSpk_1();" title="Falar com paciente"><i class="fas fa-user-circle"></i></button>
+                <button class="btn-circle" id="btnSpkPaciente_1" onclick="btnSpk_1('btnSpkPaciente_1');" title="Ouvir/Mutar paciente"><i class="fas fa-assistive-listening-systems"></i></button> | 
+                <button class="btn-circle" id="btnCall_1" onclick="btnCall_1();"><i class="fas fa-bell" title="Chamar Enfermagem"></i></button>
+                <button class="btn-circle" id="btnChat_1" onclick="btnChat_1('btnChat_1');"><i class="fas fa-comments" title="Chat"></i></button>
+                <button class="btn-circle" id="btnVideo_1" onclick="btnVideo_1('btnVideo_1');" title="Ligar/Desligar camera"><i class="fas fa-video"></i></button>
+            </div>
+          </div>
+          <div class="col">
+            <!-- <div style="background-color: #2f3947;" class="col-3.5"> -->
+            <div id="operator-2">
+                <!-- <iframe allow="camera; microphone; display-capture; autoplay; clipboard-write" src="https://jitsi.gausstech.io/cetam#jitsi_meet_external_api_id=0&amp;userInfo.email=%22email%40gausstech.io%22&amp;userInfo.displayName=%22unidade3%22&amp;appData.localStorageContent=null" name="jitsiConferenceFrame0" id="jitsiConferenceFrame0" allowfullscreen="false" style="height: 100%; width: 100%; border: 0px;"></iframe> -->
+            </div>
+            <div id="barraRaiseHand_2" style="text-align:center;background-color: #2f3947;" >
+                <label id="chamando_2" style="color:#2f3947;font-weight:bold;"> CHAMANDO </label>
+            </div>
+            <br>
+            <div id="commandButtons" style="text-align:center;background-color: #2f3947;" >
+                <button class="btn-circle" id="btnMic_2" onclick="btnMic_2('btnMic_2');" title="Falar com Enfermagem"><i class="fas fa-microphone"></i></button>
+                <button class="btn-circle" id="btnSpeaker_2" onclick="btnSpk_2('btnSpeaker_2');" title="Ouvir Enfermagem"><i class="fas fa-volume-up"></i></button> | 
+                <button class="btn-circle" id="btnMicPaciente" onclick="btnSpk_2();" title="Falar com paciente"><i class="fas fa-user-circle"></i></button>
+                <button class="btn-circle" id="btnSpkPaciente_2" onclick="btnSpk_2('btnSpkPaciente_2');" title="Ouvir/Mutar paciente"><i class="fas fa-assistive-listening-systems"></i></button> | 
+                <button class="btn-circle" id="btnCall_2" onclick="btnCall_2();"><i class="fas fa-bell" title="Chamar Enfermagem"></i></button>
+                <button class="btn-circle" id="btnChat_2" onclick="btnChat_2('btnChat_2');"><i class="fas fa-comments" title="Chat"></i></button>
+                <button class="btn-circle" id="btnVideo_2" onclick="btnVideo_2('btnVideo_2');" title="Ligar/Desligar camera"><i class="fas fa-video"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript" src="js/operador-1.js"></script>
+    <script type="text/javascript" src="js/operador-2.js"></script>
+
+    </div>
+
+    <p id="txtIntercom" style="display:none;color:white;">Intercom : paciente ouvindo</p>
+    <p id="txtEnfermagem" style="display:none;color:white;">Intercom : enfermagem ouvindo</p>
+    <p id="txtStatus" style="display:none;color:white;">Status</p>
+  </div>
+</body>
+<!-- <script>
+  console.log("loading json file...");
+  var response = $.getJSON("json/estacao.json", function(json) {
+
+  if(json.tela_1.enabled == "true") {  tela_1 = true ; }else{ tela_1 = false};
+  if(json.tela_2.enabled == "true") {  tela_2 = true ; }else{ tela_2 = false};
+  if(json.tela_3.enabled == "true") {  tela_3 = true ; }else{ tela_3 = false};
+
+  div_tela_1 = document.getElementById("div_tela_1");
+  div_tela_2 = document.getElementById("div_tela_2");
+  div_tela_3 = document.getElementById("div_tela_3");
+  div_central = document.getElementById("div_central");
+
+  botoes_tela_1 = document.getElementById("button_container1");
+  botoes_tela_2 = document.getElementById("button_container2");
+  botoes_tela_3 = document.getElementById("button_container3");
+
+  nome_unidade_1 = document.getElementById("nome_unidade_1");
+  nome_unidade_2 = document.getElementById("nome_unidade_2");
+  nome_unidade_3 = document.getElementById("nome_unidade_3");
+
+  nome_unidade_1.innerHTML = json.tela_1.nome_host;
+  nome_unidade_2.innerHTML = json.tela_2.nome_host;
+  nome_unidade_3.innerHTML = json.tela_3.nome_host;
+
+  if(tela_1){
+    console.log("Tela 1 enabled");
+    div_tela_1.style.visibility = "";
+    botoes_tela_1.style.visibility = "";
+
+  }else{
+    console.log("Tela 1 disabled");
+    div_tela_1.remove();
+    botoes_tela_1.remove();
+  }
+
+  if(tela_2){
+    console.log("Tela 2 enabled");
+    div_tela_2.style.visibility = "";
+    botoes_tela_2.style.visibility = "";
+  }else{
+    console.log("Tela 2 disabled");
+    div_tela_2.remove();
+    botoes_tela_2.remove();
+  }
+
+  if(tela_3){
+    console.log("Tela 3 enabled");
+    div_tela_3.style.visibility = "";
+    botoes_tela_3.style.visibility = "";
+  }else{
+    console.log("Tela 3 disabled");
+    div_tela_3.remove();
+    botoes_tela_3.remove();
+  }
+
+  if(tela_1 && tela_2 && tela_3){
+    console.log("Todas as telas enabled.");
+
+    div_tela_1.style.width = "33%";
+    botoes_tela_1.style.width = "33%";
+
+    div_tela_2.style.width = "33%";
+    botoes_tela_2.style.width = "33%";
+
+    div_tela_3.style.width = "33%";
+    botoes_tela_3.style.width = "33%";
+  }
+  if(tela_1 && tela_2 && (! tela_3)){
+    console.log("Telas 1 e 2 enabled.");
+
+    div_tela_1.style.width = "48%";
+    botoes_tela_1.style.width = "50%";
+
+    div_tela_2.style.width = "48%";
+    botoes_tela_2.style.width = "50%";
+
+  }
+  if(tela_1 && !tela_2 && tela_3){
+    console.log("Telas 1 e 3 enabled.");
+
+    div_tela_1.style.width = "45%";
+    botoes_tela_1.style.width = "45%";
+
+    div_tela_3.style.width = "45%";
+    botoes_tela_3.style.width = "45%";
+  }
+  if(!tela_1 && tela_2 && tela_3){
+    console.log("Telas 2 e 3 enabled.");
+
+    div_tela_2.style.width = "48%";
+    botoes_tela_2.style.width = "50%";
+
+    div_tela_3.style.width = "48%";
+    botoes_tela_3.style.width = "50%";
+  }
+
+  if(tela_1 && !tela_2 && !tela_3){
+    console.log("Tela 1 enabled.");
+    div_central.style.width = "100%";
+    div_tela_1.style.width = "60%";
+    
+    botoes_tela_1.style.width = "40%";
+  }
+
+  if(!tela_1 && tela_2 && !tela_3){
+    console.log("Tela 2 enabled.");
+    div_tela_2.style.width = "60%";
+    botoes_tela_2.style.width = "60%";
+  }
+
+  if(!tela_1 && !tela_2 && tela_3){
+    console.log("Tela 3 enabled.");
+    div_tela_3.style.width = "60%";
+    botoes_tela_3.style.width = "60%";
+  }
+});
+</script> -->
+</html>

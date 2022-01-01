@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/intercom.css">
+
+    <script src="https://static.opentok.com/v2/js/opentok.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.2/mqttws31.js"></script>
+
+    <script type="text/javascript" src="js/mqtt-dashboard.js"></script>
+    <script type="text/javascript" src="js/controlador.js"></script>
+    <script type="text/javascript" src="js/dashboard.js"></script>
+</head>
+
+
+<body>
+    <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-2">
+        <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="#">Intercom Interface</a>
+    </nav> -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-2">
+      <a class="navbar-brand col-lg-2 mr-0 px-3" href="#">Intercom Control Panel</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+        </ul>
+        <div class="row" id="videos">
+          <div id="subscriber"></div>
+          <div>   |   </div>
+          <div id="publisher"></div>
+          <form class="form-inline my-2 my-lg-0">
+            <input id="myInput" class="form-control mr-sm-2" type="search" onkeyup="buscaClientes()" placeholder="Filtrar clientes" aria-label="Buscar">
+            <!-- <button class="btn btn-outline-success my-2 my-sm-0" onclick="buscaClientes()" type="submit">Buscar</button> -->
+          </form>
+        </div>
+
+      </div>
+    </nav>    
+    <table id="myTable" class="table table-hover">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">id</th>
+            <th scope="col">Cliente</th>
+            <th scope="col">Marca</th>
+            <th scope="col">Modelo</th>
+            <th scope="col">Local</th>
+            <th scope="col">Status</th>
+            <th scope="col">Audio</th>
+            <th scope="col">Endpoints</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td id="mac-1">b827ebd97628</td>
+            <td>Gauss Tech</td>
+            <td>Philips</td>
+            <td>Achieva</td>
+            <td>Escritorio</td>
+            <td>
+              <i id="statusMQTT_b827ebd97628" class="bi bi-check2-circle"  style="color:red;font-size:30px;" title="MQTT Intercom"></i>
+              <i id="statusAudio_b827ebd97628" class="bi bi-speaker-fill"  style="color:red;font-size:30px;" title="Audio Intercom"></i><br>
+              <label id="cpuTemp_b827ebd97628">CPU: 0</label><i id="thermometer_b827ebd97628" class="bi bi-thermometer"></i>
+              <label id="ramUsed_b827ebd97628">RAM (usada): %</label>
+            </td>
+            <td>
+                <div class="container-fluid">
+                    <script>var this_mac = document.getElementById('mac-1').innerHTML;</script>
+                    <button type="button" class="btn btn-primary" onclick="iniciar('b827ebd97628', 'enf-1', 'cc-1');">Iniciar</button>
+                    <button type="button" class="btn btn-danger" onclick="reloadIntercom('b827ebd97628');reloadCommandCenter('cc-1');reloadEnfermagem('enf-1');">Parar</button>
+                    <br><br>
+                    <table>
+                      <thead>
+                        <tr>
+                          <th colspan="2" class="text-center">Intercom</th>
+                          <th colspan="2" class="text-center">Enfermagem</th>
+                          <th colspan="2" class="text-center">Botões</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <script>var this_mac = document.getElementById('mac-1').innerHTML;</script>
+                        <td><i id="micIntercom_b827ebd97628" class="bi bi-mic-mute-fill"  style="color:red;font-size:30px;" onclick="micSwitch('cetam', 'intercom','b827ebd97628');" title="Unmute"></i></td>
+                        <td><i id="speakerIntercom_b827ebd97628" class="bi bi bi-headphones"  style="color:red;font-size:30px;" onclick="speakerSwitch('cetam', 'intercom', 'b827ebd97628');" title="Ouvir"></i></td>
+
+                        <td><i id="micEnfermagem_enf-1" class="bi bi-mic-mute-fill"  style="color:red;font-size:30px;" onclick="micSwitch('cetam', 'enfermagem','enf-1');"></i></td>
+                        <td><i id="speakerEnfermagem_enf-1" class="bi bi bi-headphones"  style="color:red;font-size:30px;" onclick="speakerSwitch('cetam', 'enfermagem', 'enf-1');"></i></td>
+
+                        <td><button type="button" class="btn btn-primary" onclick="sendMessage('cetam/intercom/' + 'b827ebd97628', 'ON')">ON</button></td>
+                        <td><button type="button" class="btn btn-danger" onclick="sendMessage('cetam/intercom/' + 'b827ebd97628', 'OFF')">OFF</button></td>
+                      </tbody>
+                    </table>
+                </div>
+                <div id="subscriber" style="display: flex;justify-content: space-between;"></div>
+                <div id="publisher"></div>
+            </td>
+            <td>
+              <table class="table table-borderless">
+                <tbody>
+                <tr><td>Intercom <td><td id="endpoint_b827ebd97628">OFF</td></tr>
+                <tr><td>Operador<td><td id="endpoint_cc-1">OFF</td></tr>
+                <tr><td>Enfermagem<td><td id="endpoint_enf-1">OFF</td></tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td id="mac-2">b827eb3da438</td>
+            <td>CETAM</td>
+            <td>Philips</td>
+            <td>Intera</td>
+            <td>Unidade 3 - SBO</td>
+            <td>
+              <i id="statusMQTT_b827eb3da438" class="bi bi-check2-circle"  style="color:red;font-size:30px;" title="MQTT Intercom"></i>
+              <i id="statusAudio_b827eb3da438" class="bi bi-speaker-fill"  style="color:red;font-size:30px;" title="Audio Intercom"></i><br>
+              <label id="cpuTemp_b827eb3da438">CPU: 0</label><i id="thermometer_b827eb3da438" class="bi bi-thermometer"></i>
+              <label id="ramUsed_b827eb3da438">RAM (usada): %</label>
+            </td>
+            <td>
+                <div class="container-fluid">
+                    <button type="button" class="btn btn-primary" onclick="iniciar('b827eb3da438', 'enf-3', 'cc-1');">Iniciar</button>
+                    <button type="button" class="btn btn-danger" onclick="reloadIntercom('b827eb3da438');reloadCommandCenter('cc-1');reloadEnfermagem('enf-3');">Parar</button>
+                    <br><br>
+                    <table>
+                      <thead>
+                        <tr>
+                          <th colspan="2" class="text-center">Intercom</th>
+                          <th colspan="2" class="text-center">Enfermagem</th>
+                          <th colspan="2" class="text-center">Botões</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <td><i id="micIntercom_b827eb3da438" class="bi bi-mic-mute-fill"  style="color:red;font-size:30px;" onclick="micSwitch('cetam', 'intercom','b827eb3da438');" title="Unmute"></i></td>
+                        <td><i id="speakerIntercom_b827eb3da438" class="bi bi bi-headphones"  style="color:red;font-size:30px;" onclick="speakerSwitch('cetam', 'intercom', 'b827eb3da438');" title="Ouvir"></i></td>
+
+                        <td><i id="micEnfermagem_enf-3" class="bi bi-mic-mute-fill"  style="color:red;font-size:30px;" onclick="micSwitch('cetam', 'enfermagem','enf-3');"></i></td>
+                        <td><i id="speakerEnfermagem_enf-3" class="bi bi bi-headphones"  style="color:red;font-size:30px;" onclick="speakerSwitch('cetam', 'enfermagem', 'enf-3');"></i></td>
+
+                        <td><button type="button" class="btn btn-primary" onclick="sendMessage('cetam/intercom/' + 'b827eb3da438', 'ON')">ON</button></td>
+                        <td><button type="button" class="btn btn-danger" onclick="sendMessage('cetam/intercom/' + 'b827eb3da438', 'OFF')">OFF</button></td>
+                      </tbody>
+                    </table>
+                </div>
+                <div id="subscriber" style="display: flex;justify-content: space-between;"></div>
+                <div id="publisher"></div>
+            </td>
+            <td>
+              <table class="table table-borderless">
+                <tbody>
+                <tr><td>Intercom <td><td id="endpoint_b827eb3da438">OFF</td></tr>
+                <tr><td>Operador<td><td id="endpoint_cc-1">OFF</td></tr>
+                <tr><td>Enfermagem<td><td id="endpoint_enf-3">OFF</td></tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+      
+      <div class="container-fluid">
+        <h4>Comandos</h4>
+        <!-- <button type="button" class="btn btn-primary" onclick="listIntercoms()">LIST</button> -->
+        <button type="button" class="btn btn-primary" onclick="updateIntercoms()">UPDATE</button>
+      </div>
+
+</body>
+
+</html>

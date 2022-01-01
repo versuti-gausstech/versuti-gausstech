@@ -1,0 +1,27 @@
+p {
+  text-align: center;
+  font-size: 1.2em;
+  font-weight: bold;
+  color:white;
+}
+.container{
+  display: flex;
+  justify-content: center;
+}
+
+.butt {
+    border: 1px outset blue;
+    background-color: lightBlue;
+    height:150px;
+    width:250px;
+    cursor:pointer;
+    float:center;
+}
+
+.butt:hover {
+background-color: blue;
+    color:white;
+}
+
+.blink { animation: blinker 0.1s cubic-bezier(.5, 0, 1, 1) infinite alternate; }
+@keyframes blinker { from { opacity: 1; } to { opacity: 0; } }
